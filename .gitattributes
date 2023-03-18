@@ -42,6 +42,8 @@ python/** !export-ignore
 scripts !export-ignore
 scripts/sources.lst !export-ignore
 scripts/libbrotli*.pc.in !export-ignore
+build.zig !export-ignore
+build.zig.zon !export-ignore
 
 # Add testdata
 tests !export-ignore
