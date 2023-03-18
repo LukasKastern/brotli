@@ -24,7 +24,7 @@ pub fn build(b: *std.build.Builder) void {
     
     brotli_common.linkLibC();
     brotli_common.install();
-
+    brotli_common.installHeadersDirectory("c/include/brotli", "brotli");
 
     const brotli_encoder = b.addStaticLibrary(.{
         .name = "brotliencoder",
