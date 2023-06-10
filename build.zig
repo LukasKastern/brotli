@@ -22,7 +22,7 @@ pub fn build(b: *std.build.Builder) void {
     brotli_common.addIncludePath("c/include");
 
     brotli_common.linkLibC();
-    _ = b.addInstallArtifact(brotli_common);
+    b.installArtifact(brotli_common);
     brotli_common.installHeadersDirectory("c/include/brotli", "brotli");
 
     const brotli_encoder = b.addStaticLibrary(.{
@@ -58,7 +58,7 @@ pub fn build(b: *std.build.Builder) void {
     brotli_encoder.addIncludePath("c/include");
 
     brotli_encoder.linkLibC();
-    _ = b.addInstallArtifact(brotli_encoder);
+    b.installArtifact(brotli_encoder);
 
     const brotli_dec = b.addStaticLibrary(.{
         .name = "brotlidec",
@@ -76,7 +76,7 @@ pub fn build(b: *std.build.Builder) void {
     brotli_dec.addIncludePath("c/include");
 
     brotli_dec.linkLibC();
-    _ = b.addInstallArtifact(brotli_dec);
+    b.installArtifact(brotli_dec);
 
     const brotli_cli = b.addExecutable(.{ .name = "brotli", .target = target, .optimize = optimize, .root_source_file = .{ .path = "c/tools/brotli.c" } });
 
