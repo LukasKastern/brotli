@@ -19,7 +19,7 @@ pub fn build(b: *std.build.Builder) void {
         "c/common/transform.c",
     }, &.{});
 
-    brotli_common.addIncludePath("c/include");
+    brotli_common.addIncludePath(.{ .path = "c/include" });
 
     brotli_common.linkLibC();
     b.installArtifact(brotli_common);
@@ -55,7 +55,7 @@ pub fn build(b: *std.build.Builder) void {
         "c/enc/utf8_util.c",
     }, &.{});
 
-    brotli_encoder.addIncludePath("c/include");
+    brotli_encoder.addIncludePath(.{ .path = "c/include" });
 
     brotli_encoder.linkLibC();
     b.installArtifact(brotli_encoder);
@@ -73,19 +73,19 @@ pub fn build(b: *std.build.Builder) void {
         "c/dec/state.c",
     }, &.{});
 
-    brotli_dec.addIncludePath("c/include");
+    brotli_dec.addIncludePath(.{ .path = "c/include" });
 
     brotli_dec.linkLibC();
     b.installArtifact(brotli_dec);
 
     const brotli_cli = b.addExecutable(.{ .name = "brotli", .target = target, .optimize = optimize, .root_source_file = .{ .path = "c/tools/brotli.c" } });
 
-    brotli_cli.addIncludePath("c/include");
+    brotli_cli.addIncludePath(.{ .path = "c/include" });
 
     brotli_cli.linkLibrary(brotli_dec);
     brotli_cli.linkLibrary(brotli_encoder);
     brotli_cli.linkLibrary(brotli_common);
 
     brotli_cli.linkLibC();
-    _ = b.addInstallArtifact(brotli_cli);
+    b.installArtifact(brotli_cli);
 }
